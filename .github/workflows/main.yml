@@ -1,9 +1,29 @@
-  name: Publish NuGet
-  uses: rohith/publish-nuget@v1
-  with:
-    # Project (csproj) directory path relative from the root of repository
-    project_dir: src/SharpLearning.Optimization
-    # Format of the tag to be created, `*` is placeholder for actual version
-    tag_format: # optional, default is v*
-    # API key for the NuGet feed
-    nuget_key: # optional
+name: publish to nuget
+on:
+  push:
+    branches:
+      - master # Your default release branch
+jobs:
+  publish:
+    name: publish to nuget
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2 # This must be >= 2 to compare commits
+
+      # Optional step, add only for a specific dotnet version that doesn't come with ubuntu-latest
+      # For a list of software that comes pre-installed with ubuntu-latest visit bit.ly/2synnZl
+      # - name: Setup dotnet
+      #   uses: actions/setup-dotnet@v1
+      #   with:
+      #     dotnet-version: 3.1.100
+      
+      # Publish
+      - name: Publish if version is updated
+        uses: rohith/publish-nuget@v1
+        # with: # All inputs are optional (details given below)
+        #   project_dir:  src/SharpLearning.Optimization
+        #   tag_format: v* # [*] gets replaced with version
+        #   nuget_key: ${{secrets.NUGET_API_KEY}} # nuget.org API key
