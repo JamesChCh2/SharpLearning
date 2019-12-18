@@ -1,4 +1,4 @@
-- name: Publish NuGet
+  name: Publish NuGet
   uses: rohith/publish-nuget@v1
   with:
     # Project (csproj) directory path relative from the root of repository
