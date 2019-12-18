@@ -23,7 +23,7 @@ jobs:
       # Publish
       - name: Publish if version is updated
         uses: rohith/publish-nuget@v1
-        # with: # All inputs are optional (details given below)
-        #   project_dir:  src/SharpLearning.Optimization
+        with:
+          project_dir:  src/SharpLearning.Optimization
         #   tag_format: v* # [*] gets replaced with version
         #   nuget_key: ${{secrets.NUGET_API_KEY}} # nuget.org API key
